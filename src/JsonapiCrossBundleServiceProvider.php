@@ -1,6 +1,6 @@
 <?php declare(strict_types = 1);
 
-namespace Drupal\jsonapi_cross_bundles;
+namespace Drupal\jsonapi_cross_bundle;
 
 use Drupal\Core\DependencyInjection\ContainerBuilder;
 use Drupal\Core\DependencyInjection\ServiceProviderBase;
