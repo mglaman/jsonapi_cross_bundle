@@ -1,0 +1,13 @@
+{
+  "name": "drupal/jsonapi_cross_bundle",
+  "type": "drupal-module",
+  "description": "Experimental code for adding cross-bundle resource collections for Drupal's JSON API module",
+  "keywords": ["Drupal", "JSON API"],
+  "license": "GPL-2.0+",
+  "homepage": "https://github.com/mglaman/jsonapi_cross_bundle",
+  "minimum-stability": "dev",
+  "require": {
+    "drupal/core": "^8.7.4"
+  }
+}
+
