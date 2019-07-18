@@ -1,0 +1,12 @@
+services:
+  jsonapi_cross_bundle.cross_bundle_resource_type_repository:
+    class: Drupal\jsonapi_cross_bundle\ResourceType\CrossBundleResourceTypeRepository
+    public: false
+    decorates: jsonapi.resource_type.repository
+    parent: jsonapi.resource_type.repository
+
+  jsonapi_cross_bundle.cross_bundle_field_resolver:
+    class: Drupal\jsonapi_cross_bundle\Context\CrossBundleFieldResolver
+    public: false
+    decorates: jsonapi.field_resolver
+    parent: jsonapi.field_resolver
