@@ -1,0 +1,6 @@
+name: "JSON:API Cross Bundle"
+description: "Add cross-bundle resource collections for Drupal's JSON API module"
+core: 8.x
+type: module
+dependencies:
+  - drupal:jsonapi
