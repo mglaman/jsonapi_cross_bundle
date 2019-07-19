@@ -1,0 +1,31 @@
+language: php
+sudo: false
+env:
+  global:
+    - SIMPLETEST_BASE_URL=http://127.0.0.1:8080/
+    - SIMPLETEST_DB=sqlite://localhost//dev/shm/test.sqlite
+matrix:
+  include:
+    - php: '7.1'
+    - php: '7.2'
+    - php: '7.3'
+  allow_failures:
+    - php: nightly
+  fast_finish: true
+before_install:
+  - set -eo pipefail
+  - phpenv config-rm xdebug.ini || true
+  - composer global require "hirak/prestissimo:^0.3"
+before_script:
+  - composer create-project drupal-composer/drupal-project:8.x-dev $TRAVIS_BUILD_DIR/../drupal --no-interaction --no-dev --prefer-dist
+  - |
+    cd $TRAVIS_BUILD_DIR/../drupal
+    composer config repositories.1 '{"type": "path", "url": "'$TRAVIS_BUILD_DIR'" }'
+    composer require drupal/jsonapi_extras
+    composer require drupal/jsonapi_cross_bundle "*"
+script:
+  - cd $TRAVIS_BUILD_DIR/../drupal/web
+  - ../vendor/bin/phpunit -c core modules/contrib/jsonapi_cross_bundle --debug --verbose
+cache:
+  directories:
+    - "$HOME/.composer/cache/files"
