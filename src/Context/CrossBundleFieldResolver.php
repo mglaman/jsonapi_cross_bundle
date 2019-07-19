@@ -63,7 +63,7 @@ final class CrossBundleFieldResolver extends FieldResolver {
     assert(isset($definitions[$internal_field_name]), 'The field name should have already been validated.');
     $field_definition = $definitions[$internal_field_name];
     $filter_access_results = $this->moduleHandler->invokeAll('jsonapi_entity_field_filter_access', [$field_definition, \Drupal::currentUser()]);
-    $filter_access_result = array_reduce($filter_access_results, function (AccessResultInterface $combined_result, AccessResultInterface $result) {
+    $filter_access_result = array_reduce($filter_access_results, static function (AccessResultInterface $combined_result, AccessResultInterface $result) {
       return $combined_result->orIf($result);
     }, AccessResult::neutral());
     if (!$filter_access_result->isNeutral()) {
