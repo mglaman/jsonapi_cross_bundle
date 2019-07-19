@@ -14,10 +14,19 @@ final class CrossBundlesResourceType extends ResourceType {
   public function getPath(): string {
     return $this->entityTypeId;
   }
+
   /**
    * {@inheritdoc}
    */
   public function getBundle(): ?string {
     return NULL;
   }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function isMutable() {
+    return FALSE;
+  }
+
 }

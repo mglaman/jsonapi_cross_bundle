@@ -12,7 +12,7 @@ use Drupal\Core\Entity\FieldableEntityInterface;
 use Drupal\jsonapi\ResourceType\ResourceType;
 use Drupal\jsonapi\ResourceType\ResourceTypeRepository;
 
-final class CrossBundleResourceTypeRepository extends ResourceTypeRepository {
+class CrossBundleResourceTypeRepository extends ResourceTypeRepository {
 
   public function all() {
     $resource_types = parent::all();
