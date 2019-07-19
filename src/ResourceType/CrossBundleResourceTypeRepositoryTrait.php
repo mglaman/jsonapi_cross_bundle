@@ -11,14 +11,21 @@ use Drupal\Core\Entity\EntityTypeInterface;
 use Drupal\Core\Entity\FieldableEntityInterface;
 use Drupal\jsonapi\ResourceType\ResourceType;
 
+/**
+ * Trait used for the two repositories.
+ *
+ * Removed when https://www.drupal.org/project/jsonapi_extras/issues/3068811 lands
+ */
 trait CrossBundleResourceTypeRepositoryTrait {
+
   public function all() {
     $resource_types = parent::all();
 
     $cached = $this->staticCache->get('jsonapi.cross_bundle_resource_types', FALSE);
     if ($cached === FALSE) {
       foreach ($this->entityTypeManager->getDefinitions() as $entity_type) {
-        if ($entity_type === 'search_api_document') {
+        // Skip entities without bundles.
+        if (!$entity_type->getKey('bundle')) {
           continue;
         }
         $raw_fields = $this->getAllBaseFieldNames($entity_type);

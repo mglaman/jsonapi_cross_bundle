@@ -14,7 +14,12 @@ final class CrossBundleResourceTypeRepositoryTest extends JsonapiCrossBundleTest
     $filtered_resource_types = array_filter($resource_types, static function (ResourceType $resource_type) {
       return $resource_type->getEntityTypeId() === 'entity_test' && $resource_type->getBundle() === NULL;
     });
-    $this->assertCount(1, $filtered_resource_types);
+    $this->assertCount(1, $filtered_resource_types, 'Entity type with bundle support has a root resource type.');
+
+    $filtered_resource_types = array_filter($resource_types, static function (ResourceType $resource_type) {
+      return $resource_type->getEntityTypeId() === 'user' && $resource_type->getBundle() === NULL;
+    });
+    $this->assertCount(0, $filtered_resource_types, 'Entity type without bundle support does not have root resource type.');
   }
 
 }

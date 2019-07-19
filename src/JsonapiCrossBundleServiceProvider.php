@@ -11,6 +11,7 @@ final class JsonapiCrossBundleServiceProvider extends ServiceProviderBase {
     // We cannot use the module handler as the container is not yet compiled.
     // @see \Drupal\Core\DrupalKernel::compileContainer()
     $modules = $container->getParameter('container.modules');
+    // @todo remove when https://www.drupal.org/project/jsonapi_extras/issues/3068811 lands
     if (isset($modules['jsonapi_extras'])) {
       $definition = $container->getDefinition('jsonapi_cross_bundle.cross_bundle_resource_type_repository');
       $definition->setClass(JsonapiExtrasCrossBundleResourceTypeRepository::class);
