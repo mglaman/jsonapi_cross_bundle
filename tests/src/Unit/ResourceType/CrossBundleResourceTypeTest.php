@@ -30,4 +30,13 @@ final class CrossBundleResourceTypeTest extends UnitTestCase {
     $this->assertEquals('entity_test', $resource_type->getPath());
   }
 
+  public function testMutability() {
+    $resource_type = new CrossBundlesResourceType(
+      'entity_test',
+      'entity_test',
+      EntityTest::class
+    );
+    $this->assertFalse($resource_type->isMutable());
+  }
+
 }

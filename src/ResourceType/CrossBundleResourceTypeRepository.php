@@ -31,7 +31,7 @@ class CrossBundleResourceTypeRepository extends ResourceTypeRepository {
           $entity_type->getClass(),
           $entity_type->isInternal(),
           $entity_type->getStorageClass() !== ContentEntityNullStorage::class,
-          !$entity_type instanceof ConfigEntityTypeInterface,
+          FALSE,
           FALSE,
           static::getBaseFieldMapping($raw_fields, $entity_type)
         );
