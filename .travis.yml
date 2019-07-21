@@ -18,11 +18,15 @@ before_install:
   - composer global require "hirak/prestissimo:^0.3"
 before_script:
   - composer create-project drupal-composer/drupal-project:8.x-dev $TRAVIS_BUILD_DIR/../drupal --no-interaction --no-dev --prefer-dist
+  - cd $TRAVIS_BUILD_DIR/../drupal
   - |
-    cd $TRAVIS_BUILD_DIR/../drupal
     composer config repositories.1 '{"type": "path", "url": "'$TRAVIS_BUILD_DIR'" }'
-    composer require drupal/jsonapi_extras
     composer require drupal/jsonapi_cross_bundle "*"
+  - |
+    composer require drupal/jsonapi_extras
+    cd $TRAVIS_BUILD_DIR/../drupal/web/modules/contrib/jsonapi_extras
+    curl https://www.drupal.org/files/issues/2019-07-18/3068811-5.patch | patch -p1
+
 script:
   - cd $TRAVIS_BUILD_DIR/../drupal/web
   - ../vendor/bin/phpunit -c core modules/contrib/jsonapi_cross_bundle --debug --verbose
